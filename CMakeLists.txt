@@ -1,7 +1,22 @@
-add_link_options(-sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=64MB)
+cmake_minimum_required(VERSION 3.24.2)
 
 add_subdirectory(llvm-project/llvm)
 
 add_executable(compile main.cpp)
-# target_include_directories(compile PRIVATE llvm-project/clang/include)
-# target_link_libraries(compile PRIVATE clangFrontend)
+target_link_options(compile PRIVATE
+    -sINVOKE_RUN=0
+    -sEXPORT_ES6
+    -sMODULARIZE
+    -sWASM_BIGINT
+    -sALLOW_MEMORY_GROWTH
+    -sINITIAL_MEMORY=64MB
+    -sENVIRONMENT=worker
+)
+target_include_directories(compile PRIVATE
+    llvm-project/llvm/include
+    llvm-project/clang/include
+    build/llvm-project/llvm/include
+    build/llvm-project/llvm/tools/clang/include
+)
+target_link_directories(compile PRIVATE build/llvm-project/llvm/lib)
+target_link_libraries(compile PRIVATE clangFrontend)

@@ -15,7 +15,8 @@ wget -qO- https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-16/
 # build
 emcmake cmake -G Ninja -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_PARALLEL_LINK_JOBS=1 \
+    -DLLVM_ENABLE_PROJECTS="clang;lld" \
+    -DLLVM_PARALLEL_LINK_JOBS=2 \
     -DLLVM_CCACHE_BUILD=ON \
     -DLLVM_CCACHE_DIR=/tmp/ccache
-ninja -C build
+ninja -C build -- compile
