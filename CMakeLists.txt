@@ -9,8 +9,12 @@ target_link_options(compile PRIVATE
     -sMODULARIZE
     -sWASM_BIGINT
     -sALLOW_MEMORY_GROWTH
-    -sINITIAL_MEMORY=64MB
+    # -sINITIAL_MEMORY=64MB
+    # -sWASMFS=1
+    -sMALLOC=emmalloc
     -sENVIRONMENT=worker
+    # --embed-file=lib/clang/16.0.0/include
+    # --closure 1
 )
 target_include_directories(compile PRIVATE
     llvm-project/llvm/include

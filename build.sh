@@ -18,5 +18,6 @@ emcmake cmake -G Ninja -S . -B build \
     -DLLVM_ENABLE_PROJECTS="clang;lld" \
     -DLLVM_PARALLEL_LINK_JOBS=2 \
     -DLLVM_CCACHE_BUILD=ON \
-    -DLLVM_CCACHE_DIR=/tmp/ccache
+    -DLLVM_CCACHE_DIR=/tmp/ccache \
+    # -DLLVM_ENABLE_LTO=Full
 ninja -C build -- compile
