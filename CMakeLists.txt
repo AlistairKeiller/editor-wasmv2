@@ -6,19 +6,18 @@ add_subdirectory(llvm-project/llvm)
 
 add_executable(compile main.cpp)
 target_link_options(compile PRIVATE
-    -sINVOKE_RUN=0
     -sEXPORT_ES6
     -sMODULARIZE
     -sWASM_BIGINT
     -sALLOW_MEMORY_GROWTH
+    # -sWASMFS
     # -sINITIAL_MEMORY=64MB
-    # -sWASMFS=1
     -sEXPORTED_FUNCTIONS=_init,_compile
     -sEXPORTED_RUNTIME_METHODS=FS
     -sMALLOC=emmalloc
     -sENVIRONMENT=worker
     --embed-file=sysroot
-    # --closure 1
+    --embed-file=llvm-project/llvm/lib/clang/16.0.0/include
 )
 target_include_directories(compile PRIVATE
     llvm-project/llvm/include
@@ -32,5 +31,5 @@ target_link_libraries(compile PRIVATE
     clangFrontend
     LLVMWebAssemblyCodeGen
     LLVMWebAssemblyAsmParser
-    clang
+    clang # to generate clang include files
 )

@@ -31,7 +31,7 @@ extern "C" int compile()
     Clang->createDiagnostics();
     Clang->getHeaderSearchOpts().AddPath("sysroot/include", frontend::System, false, true);
     Clang->getHeaderSearchOpts().AddPath("sysroot/include/c++/v1", frontend::System, false, true);
-    // Clang->getHeaderSearchOpts().AddPath("sysroot/include/c++/v1", frontend::System, false, true);
+    Clang->getHeaderSearchOpts().AddPath("llvm-project/llvm/lib/clang/16.0.0/include", frontend::System, false, true);
     Clang->getFrontendOpts().Inputs.push_back(FrontendInputFile("main.cpp", Language::CXX));
     Clang->getFrontendOpts().OutputFile = "main.obj";
     Clang->getTargetOpts().Triple = "wasm32-wasi";
