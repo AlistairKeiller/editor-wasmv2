@@ -13,7 +13,7 @@ target_link_options(compile PRIVATE
     # -sWASMFS=1
     -sMALLOC=emmalloc
     -sENVIRONMENT=worker
-    # --embed-file=lib/clang/16.0.0/include
+    --embed-file=sysroot
     # --closure 1
 )
 target_include_directories(compile PRIVATE

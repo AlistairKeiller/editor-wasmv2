@@ -11,6 +11,10 @@ cd ..
 # download sysroot
 wget -qO- https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-16/wasi-sysroot-16.0.tar.gz | tar -xz
 wget -qO- https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-16/libclang_rt.builtins-wasm32-wasi-16.0.tar.gz | tar -xz
+mkdir -p build/sysroot
+cp -r wasi-sysroot/include/ build/sysroot/include/
+cp -r wasi-sysroot/lib/wasm32-wasi/ build/sysroot/lib/
+cp -r lib/wasi/libclang_rt.builtins-wasm32.a build/sysroot/lib/
 
 # build
 emcmake cmake -G Ninja -S . -B build \
